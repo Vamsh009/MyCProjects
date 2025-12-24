@@ -34,7 +34,6 @@ int isEmpty(PQueue *pq)
 
 void enqueue(PQueue *pq, Job job)
 {
-  int docno = 1;
   if (isFull(pq))
   {
     printf("Print queue is full. Cannot add new job.\n");
@@ -46,7 +45,7 @@ void enqueue(PQueue *pq, Job job)
   }
   pq->rear = (pq->rear + 1) % max;
   pq->data[pq->rear] = job;
-  printf("Enqueued Job ID: %d\n , Filename:%s %d, Pages:%d\n ", job.jobId, job.documentName, docno++, job.totalPages);
+  printf("Enqueued Job ID: %d\n , Filename:%s %d, Pages:%d\n ", job.jobId, job.documentName, job.totalPages);
 }
 
 Job dequeue(PQueue *pq)
@@ -77,6 +76,7 @@ int main()
   PQueue pq;
   intializeQueue(&pq);
   int newjobId = 1;
+  int a;
 
   printf("Adding print jobs to the queue:\n");
   for (int i = 0; i < 5; i++)
