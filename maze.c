@@ -2,23 +2,21 @@
 
 int main()
 {
-  // R=Rows (7), C=Cols (13)
-  char maze[7][13] = {
-      "|S| | | | | |",
-      "| | |X|X|X| |",
-      "| | | | |X| |",
-      "| |X|X| |X| |",
-      "| |X| | |X| |",
-      "| |X|X|X|X| |",
-      "| | | | | |E|"};
 
-  // Queue setup
+  char maze[7][13] = {
+      "|S . . . . .|",
+      "|. .XXX. . .|",
+      "|. . . . .X.|",
+      "|. XX .X. . |",
+      "|. X. . .X. |",
+      "|. XXXX. . .|",
+      "|. . . . . E|"};
+
   int q_row[100];
   int q_col[100];
   int head = 0;
   int tail = 0;
 
-  // FIND START (S)
   for (int i = 0; i < 7; i++)
   {
     for (int j = 0; j < 13; j++)
@@ -32,7 +30,6 @@ int main()
     }
   }
 
-  // FLOOD FILL BFS
   int found = -1;
   int dr[] = {-1, 1, 0, 0};
   int dc[] = {0, 0, -1, 1};
@@ -54,10 +51,9 @@ int main()
       int next_r = r + dr[i];
       int next_c = c + dc[i];
 
-      // Check bounds (0 to 6 for rows, 0 to 12 for cols)
       if (next_r >= 0 && next_r < 7 && next_c >= 0 && next_c < 13)
       {
-        // Check if empty space or End
+
         if (maze[next_r][next_c] == ' ' || maze[next_r][next_c] == 'E')
         {
 
@@ -65,7 +61,6 @@ int main()
           q_col[tail] = next_c;
           tail++;
 
-          // Mark as visited with '.' (unless it is E)
           if (maze[next_r][next_c] != 'E')
           {
             maze[next_r][next_c] = '.';
@@ -75,7 +70,6 @@ int main()
     }
   }
 
-  // PRINT RESULT (FIXED)
   if (found)
   {
     printf("Maze Solved!\n");
